@@ -114,7 +114,26 @@ function createHashMap(){
             return null
     }
 
-    return {hash,set,get}
+    function has(key){
+
+        let hashedKey = hash(key)
+        let index = hashedKey % buckets.length
+        let bucket = buckets[index]
+        if (bucket instanceof LinkedList){
+            let current = bucket.head
+            while (current) {
+                if (current.key === key){   
+                    console.log("true")
+                    return true
+                } 
+                current = current.next 
+                }
+            }
+            console.log("false")
+            return false
+    }
+
+    return {hash,set,get,has}
 }
 
 const hashMap = createHashMap()
@@ -132,4 +151,6 @@ hashMap.set("Drew","Just a chill guy")
 
 hashMap.get("Johnathan")
 hashMap.get("Drew")
+
+hashMap.has("Lesboyd")
 
